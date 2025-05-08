@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>Tableau de bord</h2>
+        <form method="POST">
+            <label for="name">Nom</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="passport">Passeport</label>
+            <input type="text" id="passport" name="passport" required>
+
+            <label for="destination">Destination</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <button type="submit">Ajouter un passager</button>
+        </form>
+
+        <h3>Passagers</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Passeport</th>
+                    <th>Destination</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for passenger in passengers %}
+                <tr>
+                    <td>{{ passenger['name'] }}</td>
+                    <td>{{ passenger['passport'] }}</td>
+                    <td>{{ passenger['destination'] }}</td>
+                    <td><a href="{{ url_for('delete_passenger', id=passenger['id']) }}">Supprimer</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('logout') }}">Déconnexion</a>
+    </div>
+</body>
+</html>

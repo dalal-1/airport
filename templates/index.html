@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Voyageurs - Aéroport</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestion des Voyageurs ✈️</h1>
+
+        <form action="/add" method="POST">
+            <input type="text" name="name" placeholder="Nom du voyageur" required>
+            <input type="text" name="passport" placeholder="Numéro de passeport" required>
+            <input type="text" name="destination" placeholder="Destination" required>
+            <button type="submit">Ajouter</button>
+        </form>
+
+        <h2>Liste des voyageurs</h2>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Passeport</th>
+                <th>Destination</th>
+                <th>Action</th>
+            </tr>
+            {% for p in passengers %}
+            <tr>
+                <td>{{ p[1] }}</td>
+                <td>{{ p[2] }}</td>
+                <td>{{ p[3] }}</td>
+                <td><a href="/delete/{{ p[0] }}" class="delete-btn">Supprimer</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
